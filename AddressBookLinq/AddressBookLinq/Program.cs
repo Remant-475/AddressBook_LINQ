@@ -21,7 +21,7 @@ namespace AddressBookLinq
                 Console.WriteLine("4.For Delete Contact");
                 Console.WriteLine("5.For Retrieving contact by State");
                 Console.WriteLine("6.For Retrieving contact by City");
-                
+               
                 Console.WriteLine("0: For Exist");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -83,6 +83,13 @@ namespace AddressBookLinq
                         Console.WriteLine("Enter City: ");
                         contact.City = Console.ReadLine();
                         address.RetrievePersonDataByUsingCity(contact);
+                        break;
+                    case 7:
+                        Console.WriteLine("Enter City :");
+                        contact.City= Console.ReadLine();
+                        Console.WriteLine("Enter State:");
+                        contact.State = Console.ReadLine();
+                        address.CountByCityOrState(contact);
                         break;
                     case 0:
                         Console.WriteLine("Exit");

@@ -122,5 +122,14 @@ namespace AddressBooklinq
                 Console.WriteLine("---------------------------------------------");
             }
         }
+
+        public void CountByCityOrState(Contact contact)
+        {
+            var contacttable = from c in dataTable.AsEnumerable()
+                          where c.Field<string>("City") == contact.City && c.Field<string>("State") == contact.State
+                          select c;
+
+            Console.WriteLine("Count of contacts in {0}, {1} is {2}", contact.City, contact.State, contacttable.Count());
+        }
     }
 }
