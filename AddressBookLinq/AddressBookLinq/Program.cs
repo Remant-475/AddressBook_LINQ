@@ -19,6 +19,9 @@ namespace AddressBookLinq
                 Console.WriteLine("2: For Display Contact");
                 Console.WriteLine("3.For Edit Contact");
                 Console.WriteLine("4.For Delete Contact");
+                Console.WriteLine("5.For Retrieving contact by State");
+                Console.WriteLine("6.For Retrieving contact by City");
+                
                 Console.WriteLine("0: For Exist");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -69,7 +72,17 @@ namespace AddressBookLinq
                         contact.FirstName = Console.ReadLine();
                         Console.WriteLine("Enter Last Name: ");
                         contact.LastName = Console.ReadLine();
-                        addressBookRepo.DeleteContact(contact);
+                        address.DeleteContact(contact);
+                        break;
+                    case 5:
+                        Console.WriteLine("Enter State: ");
+                        contact.State = Console.ReadLine();
+                        address.RetrievePersonDataByUsingState(contact);
+                        break;
+                    case 6:
+                        Console.WriteLine("Enter City: ");
+                        contact.City = Console.ReadLine();
+                        address.RetrievePersonDataByUsingCity(contact);
                         break;
                     case 0:
                         Console.WriteLine("Exit");
@@ -77,6 +90,7 @@ namespace AddressBookLinq
                     default:
                         Console.WriteLine("Invalid Input Please Choose Correct Option");
                         break;
+                   
                 }
             }
             while (option != 0);

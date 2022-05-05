@@ -17,10 +17,18 @@ namespace AddressBooklinq
             dataTable.Columns.Add("Address", typeof(string));
             dataTable.Columns.Add("City", typeof(string));
             dataTable.Columns.Add("State", typeof(string));
-            dataTable.Columns.Add("Zip", typeof(int));
-            dataTable.Columns.Add("PhoneNumber", typeof(long));
+            dataTable.Columns.Add("ZipCode", typeof(string));
+            dataTable.Columns.Add("PhoneNumber", typeof(string));
             dataTable.Columns.Add("Email", typeof(string));
+
+            dataTable.Rows.Add("Ravi", "Kumar", "Gowtham Nagar", "Bangarpet", "Karnataka", "563114", "8073112156", "shashidhar.sasic@gmail.com");
+            dataTable.Rows.Add("Lalith", "Kumar", "Vijay Nagar", "Bangarpet", "Karnataka", "563122", "8223112156", "lalith.lalu@gmail.com");
+            dataTable.Rows.Add("Mohan", "Kumar", "Shanthi Nagar", "Bangalore", "Tamilnadu", "560018", "9973112156", "mohanrah.mohan@gmail.com");
+            dataTable.Rows.Add("Kiran", "Kumar", "Ambedkar Nagar", "Kolar", "AndhraPradesh", "561363", "8073174156", "kiran.Kid@gmail.com");
+            dataTable.Rows.Add("Sridhar", "Kumar", "Amravathi Nagar", "Patna", "Bihar", "560018", "8073114656", "sridhar.sri@gmail.com");
+            dataTable.Rows.Add("Praveen", "Kumar", "Vivekanandha Nagar", "Dhanbad", "Jharkhand", "563441", "8000112156", "praveen.pravi@gmail.com");
         }
+    
         
             public void AddContact(Contact contact)
             {
@@ -38,8 +46,8 @@ namespace AddressBooklinq
                 Console.WriteLine("Address:-" + contact.Field<string>("Address"));
                 Console.WriteLine("City:-" + contact.Field<string>("City"));
                 Console.WriteLine("State:-" + contact.Field<string>("State"));
-                Console.WriteLine("ZipCode:-" + contact.Field<int>("Zip"));
-                Console.WriteLine("PhoneNumber:-" + contact.Field<long>("PhoneNumber"));
+                Console.WriteLine("ZipCode:-" + contact.Field<string>("Zip"));
+                Console.WriteLine("PhoneNumber:-" + contact.Field<string>("PhoneNumber"));
                 Console.WriteLine("Email:-" + contact.Field<string>("Email"));
                 Console.WriteLine();
             }
@@ -72,6 +80,46 @@ namespace AddressBooklinq
             if (recordedData != null)
             {
                 recordedData.Delete();
+            }
+        }
+        public void RetrievePersonDataByUsingState(Contact contact)
+        {
+            var selectedData = from dataTable in dataTable.AsEnumerable()
+                             .Where(dataTable => dataTable.Field<string>("State") == contact.State)
+                               select dataTable;
+            foreach (var table in selectedData.AsEnumerable())
+            {
+                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("FirstName:- " + table.Field<String>("FirstName"));
+                Console.WriteLine("LastName:- " + table.Field<String>("LastName"));
+                Console.WriteLine("Address:- " + table.Field<String>("Address"));
+                Console.WriteLine("City:- " + table.Field<String>("City"));
+                Console.WriteLine("State:- " + table.Field<String>("State"));
+                Console.WriteLine("ZipCode:- " + table.Field<String>("ZipCode"));
+                Console.WriteLine("PhoneNumber:- " + table.Field<String>("PhoneNumber"));
+                Console.WriteLine("Email:- " + table.Field<String>("Email"));
+                Console.WriteLine("---------------------------------------------");
+            }
+        }
+
+  
+        public void RetrievePersonDataByUsingCity(Contact contact)
+        {
+            var selectedData = from dataTable in dataTable.AsEnumerable()
+                             .Where(dataTable => dataTable.Field<string>("City") == contact.City)
+                               select dataTable;
+            foreach (var table in selectedData.AsEnumerable())
+            {
+                Console.WriteLine("----------------------------------------------");
+                Console.WriteLine("FirstName:- " + table.Field<String>("FirstName"));
+                Console.WriteLine("LastName:- " + table.Field<String>("LastName"));
+                Console.WriteLine("Address:- " + table.Field<String>("Address"));
+                Console.WriteLine("City:- " + table.Field<String>("City"));
+                Console.WriteLine("State:- " + table.Field<String>("State"));
+                Console.WriteLine("ZipCode:- " + table.Field<String>("ZipCode"));
+                Console.WriteLine("PhoneNumber:- " + table.Field<String>("PhoneNumber"));
+                Console.WriteLine("Email:- " + table.Field<String>("Email"));
+                Console.WriteLine("---------------------------------------------");
             }
         }
     }
