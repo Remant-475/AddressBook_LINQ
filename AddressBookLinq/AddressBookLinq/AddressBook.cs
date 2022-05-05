@@ -21,16 +21,14 @@ namespace AddressBooklinq
             dataTable.Columns.Add("PhoneNumber", typeof(long));
             dataTable.Columns.Add("Email", typeof(string));
         }
-        public void AddContact()
-        {
-            dataTable.Rows.Add("Remant", "Mahato", "Jorapokhar", "Dhanbad", "Jharkhand", 828112, 8271630771, "remantmahato9798@gmail.com");
-            dataTable.Rows.Add("Hemant", "Mahato", "Jorapokhar", "Dhanbad", "Jharkhand", 828112, 7979367171, "hemant402@gmail.com");
-            dataTable.Rows.Add("Aman", "Singh", "Newtown", "Kolkata", "WestBengal", 7003213, 9572846335, "aman147@gmail.com");
-            dataTable.Rows.Add("Shubham", "Singh", "Sector-2", "Bokaro", "Jharkhand", 831005, 8271453692, "shubham145@gmail.com");
-            dataTable.Rows.Add("Ajit", "Kumar", "Ashoknagar", "Patna", "Bihar", 865112, 9571593571, "ajit957@gmail.com");
-            Console.WriteLine("Contact is Added in Address Book ");
-
-        }
+        
+            public void AddContact(Contact contact)
+            {
+                dataTable.Rows.Add(contact.FirstName, contact.LastName, contact.Address, contact.City, contact.State,
+                    contact.ZipCode, contact.PhoneNumber, contact.Email);
+                Console.WriteLine("Contact Added SuccesFull");
+            }
+        
         public void DisplayContacts()
         {
             foreach (var contact in dataTable.AsEnumerable())
@@ -44,6 +42,26 @@ namespace AddressBooklinq
                 Console.WriteLine("PhoneNumber:-" + contact.Field<long>("PhoneNumber"));
                 Console.WriteLine("Email:-" + contact.Field<string>("Email"));
                 Console.WriteLine();
+            }
+        }
+        public void EditContact(Contact contact)
+        {
+            /// linq query to Check exist or not
+            /// Returns first element of sequence
+            var recordedData = dataTable.AsEnumerable().Where(data => data.Field<string>("FirstName") == contact.FirstName).First();
+            if (recordedData != null)
+            {
+                recordedData.SetField("LastName", contact.LastName);
+                recordedData.SetField("Address", contact.Address);
+                recordedData.SetField("City", contact.City);
+                recordedData.SetField("State", contact.State);
+                recordedData.SetField("ZipCode", contact.ZipCode);
+                recordedData.SetField("PhoneNumber", contact.PhoneNumber);
+                recordedData.SetField("Email", contact.Email);
+            }
+            else
+            {
+                Console.WriteLine("No dataFound");
             }
         }
     }
