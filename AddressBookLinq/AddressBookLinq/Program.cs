@@ -91,6 +91,11 @@ namespace AddressBookLinq
                         contact.State = Console.ReadLine();
                         address.CountByCityOrState(contact);
                         break;
+                    case 8:
+                        Console.WriteLine("Enter the city for sorting = ");
+                        contact.City = Console.ReadLine();
+                        address.sortContactAlphabeticallyForGivenCity(contact);
+                        break;
                     case 0:
                         Console.WriteLine("Exit");
                         break;

@@ -131,5 +131,25 @@ namespace AddressBooklinq
 
             Console.WriteLine("Count of contacts in {0}, {1} is {2}", contact.City, contact.State, contacttable.Count());
         }
+        public void sortContactAlphabeticallyForGivenCity(Contact contact)
+        {
+            /// using Lambda function
+            /////Table.asenumarable means takes all the data from table as list
+            ///a is like variable declaration or else we can say as x stores all the columns field is nthg but a.column name
+            //OrderBy() method sorts the collection in ascending order based on specified field.
+            //ThenBy() method after OrderBy to sort the collection on another field in ascending order. 
+            var records = dataTable.AsEnumerable().Where(x => x.Field<string>("City") == contact.City).OrderBy(x => x.Field<string>("FirstName")).ThenBy(x => x.Field<string>("LastName"));
+            foreach (var table in records)
+            {
+                Console.WriteLine("\nFirstName:-" + table.Field<string>("FirstName"));
+                Console.WriteLine("LastName:-" + table.Field<string>("LastName"));
+                Console.WriteLine("Address:-" + table.Field<string>("Address"));
+                Console.WriteLine("City:-" + table.Field<string>("City"));
+                Console.WriteLine("State:-" + table.Field<string>("State"));
+                Console.WriteLine("ZipCode:-" + table.Field<string>("ZipCode"));
+                Console.WriteLine("PhoneNumber:-" + table.Field<string>("PhoneNumber"));
+                Console.WriteLine("Email:-" + table.Field<string>("Email"));
+            }
+        }
     }
 }
