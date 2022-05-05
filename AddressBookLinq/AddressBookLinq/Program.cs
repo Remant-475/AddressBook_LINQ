@@ -18,6 +18,7 @@ namespace AddressBookLinq
                 Console.WriteLine("1: For Add the Contact");
                 Console.WriteLine("2: For Display Contact");
                 Console.WriteLine("3.For Edit Contact");
+                Console.WriteLine("4.For Delete Contact");
                 Console.WriteLine("0: For Exist");
                 option = int.Parse(Console.ReadLine());
                 switch (option)
@@ -62,6 +63,13 @@ namespace AddressBookLinq
                         Console.WriteLine("Enter Email ID: ");
                         contact.Email = Console.ReadLine();
                         address.EditContact(contact);
+                        break;
+                    case 4:
+                        Console.WriteLine("Enter First Name: ");
+                        contact.FirstName = Console.ReadLine();
+                        Console.WriteLine("Enter Last Name: ");
+                        contact.LastName = Console.ReadLine();
+                        addressBookRepo.DeleteContact(contact);
                         break;
                     case 0:
                         Console.WriteLine("Exit");

@@ -64,5 +64,15 @@ namespace AddressBooklinq
                 Console.WriteLine("No dataFound");
             }
         }
+        public void DeleteContact(Contact contact)
+        {
+            var recordedData = dataTable.AsEnumerable()
+                               .Where(data => (data.Field<string>("FirstName") == contact.FirstName) &&
+                               (data.Field<string>("LastName") == contact.LastName)).First();
+            if (recordedData != null)
+            {
+                recordedData.Delete();
+            }
+        }
     }
 }
